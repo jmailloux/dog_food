@@ -15,28 +15,28 @@ chicken_breast = FoodItem(
     name="Cooked chicken breast",
     category=FoodCategory.PROTEIN,
     kj_per_kg=6900.0,      # ~1650 kcal/kg * 4.184
-    dollars_per_kg=12.00,  # example price
+    dollars_per_kg=37.33,  # Zehrs cooked chicken breast strips, ~2025-12-30
 )
 
 brown_rice = FoodItem(
     name="Cooked brown rice",
     category=FoodCategory.CARB,
     kj_per_kg=4600.0,      # ~1100 kcal/kg * 4.184
-    dollars_per_kg=3.00,
+    dollars_per_kg=15.20,  # Zehrs ready brown rice side dish, ~2025-12-30
 )
 
 mixed_veg = FoodItem(
     name="Steamed mixed veg",
     category=FoodCategory.VEG,
     kj_per_kg=1500.0,      # ~360 kcal/kg * 4.184 (rough)
-    dollars_per_kg=4.00,
+    dollars_per_kg=4.00,   # Zehrs frozen mixed veg 2 kg bag, ~2025-12-30
 )
 
 pumpkin_puree = FoodItem(
     name="Pumpkin puree",
     category=FoodCategory.CARB,
     kj_per_kg=1500.0,      # rough placeholder
-    dollars_per_kg=2.50,
+    dollars_per_kg=6.30,   # Zehrs 100% pure pumpkin 796 ml, ~2025-12-30
     notes="Check max daily fiber amount with vet",
 )
 
@@ -44,7 +44,7 @@ fish_oil = FoodItem(
     name="Fish oil",
     category=FoodCategory.SUPPLEMENT,
     kj_per_kg=38000.0,     # ~9000 kcal/kg * 4.184
-    dollars_per_kg=30.00,
+    dollars_per_kg=119.98, # Zehrs omega-3 liquid 500 ml, ~2025-12-30
     notes="Dose per vet instructions",
 )
 
