@@ -4,7 +4,7 @@ from __future__ import annotations
 from typing import Dict, List
 import pandas as pd
 
-from nutrition_models import FoodCategory, FoodItem, Recipe
+from nutrition_models import FoodCategory, FoodItem
 
 
 # Units:
@@ -97,48 +97,6 @@ FOODS: List[FoodItem] = [
 FOODS_BY_NAME: Dict[str, FoodItem] = {f.name: f for f in FOODS}
 
 
-# --- Recipes (1 serving == 1 meal) ---
-#
-# Oakley is fed twice per day, so 2 servings/day.
-# Targets are computed in the notebook via weight_loss_target_kj(ideal_weight_kg),
-# and each of these recipes is tuned to be ~half the daily target for a 35 kg ideal weight
-# (~2107 kJ per meal).
-
-RECIPES: List[Recipe] = []
-
-def _r(name: str) -> Recipe:
-    r = Recipe(name=name)
-    RECIPES.append(r)
-    return r
-
-# 1) Chicken breast + rice + mixed veg
-r = _r("Breast + rice + mixed veg")
-r.add(cooked_chicken_breast, 140)
-r.add(cooked_white_rice, 156)
-r.add(mixed_vegetables, 70)
-
-# 2) Chicken thigh + rice + green beans
-r = _r("Thigh + rice + green beans")
-r.add(cooked_chicken_thigh, 130)
-r.add(cooked_white_rice, 146)
-r.add(green_beans, 150)
-
-# 3) Mixed chicken + rice + carrots
-r = _r("Mixed chicken + rice + carrots")
-r.add(cooked_chicken_breast, 80)
-r.add(cooked_chicken_thigh, 60)
-r.add(cooked_white_rice, 136)
-r.add(cooked_carrots, 200)
-
-# 4) Chicken thigh + rice + roasted squash
-r = _r("Thigh + rice + roasted squash")
-r.add(cooked_chicken_thigh, 120)
-r.add(cooked_white_rice, 146)
-r.add(roasted_butternut_squash, 200)
-
-RECIPES_BY_NAME: Dict[str, Recipe] = {r.name: r for r in RECIPES}
-
-
 # --- Convenience DataFrames for the notebook ---
 
 def foods_df() -> pd.DataFrame:
@@ -153,23 +111,4 @@ def foods_df() -> pd.DataFrame:
                 "notes": f.notes,
             }
         )
-    return pd.DataFrame(rows)
-
-def recipes_df() -> pd.DataFrame:
-    rows = []
-    for r in RECIPES:
-        for ing in r.ingredients:
-            rows.append(
-                {
-                    "recipe_name": r.name,
-                    "food_name": ing.food.name,
-                    "grams": ing.grams,
-                    "energy_kj": ing.energy_kj,
-                    "energy_kcal": ing.energy_kcal,
-                    "ingredient_cost": ing.cost,
-                    "recipe_total_kj": r.total_kj,
-                    "recipe_total_kcal": r.total_kcal,
-                    "recipe_total_cost": r.total_cost,
-                }
-            )
     return pd.DataFrame(rows)
