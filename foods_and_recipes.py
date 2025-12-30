@@ -43,6 +43,14 @@ cooked_white_rice = FoodItem(
     notes="Energy: cooked long-grain white rice (USDA via FoodStruct). Price: derived from No Frills 8 kg bag; assumes ~3x cooked yield.",
 )
 
+cooked_brown_rice = FoodItem(
+    name="Brown rice, cooked (long-grain)",
+    category=FoodCategory.CARB,
+    kj_per_kg=5146.3,        # 123 kcal/100g -> 1230 kcal/kg -> 5146.3 kJ/kg
+    dollars_per_kg=0.80,     # Slightly higher than white rice; derived from No Frills dry brown rice pricing; ~3x cooked yield
+    notes="Energy: cooked long-grain brown rice (USDA). Price: derived from No Frills dry brown rice; assumes ~3x cooked yield.",
+)
+
 mixed_vegetables = FoodItem(
     name="Mixed vegetables, frozen (prepared/cooked)",
     category=FoodCategory.VEG,
@@ -75,21 +83,6 @@ roasted_butternut_squash = FoodItem(
     notes="Energy: baked butternut squash (USDA via MyFoodData; converted from 1 cup 205 g). Price: No Frills fresh produce listing.",
 )
 
-eggshell_powder = FoodItem(
-    name="Eggshell powder (calcium)",
-    category=FoodCategory.SUPPLEMENT,
-    kj_per_kg=0.0,
-    dollars_per_kg=0.0,
-    notes="Calories negligible. Calcium density is approximate; grind finely and mix thoroughly.",
-)
-
-fish_oil = FoodItem(
-    name="Fish oil (omega-3 supplement)",
-    category=FoodCategory.SUPPLEMENT,
-    kj_per_kg=37000.0,       # ~9000 kcal/kg -> 37,656 kJ/kg (rounded)
-    dollars_per_kg=115.0,    # Approx from Canadian retail liquid fish oil pricing (~$20.97 for ~200 ml)
-    notes="Calories are real (fat). Price is a realistic retail estimate for liquid fish oil in Canada.",
-)
 
 FOODS: List[FoodItem] = [
     cooked_chicken_breast,
@@ -99,8 +92,6 @@ FOODS: List[FoodItem] = [
     green_beans,
     cooked_carrots,
     roasted_butternut_squash,
-    eggshell_powder,
-    fish_oil,
 ]
 
 FOODS_BY_NAME: Dict[str, FoodItem] = {f.name: f for f in FOODS}
@@ -125,16 +116,12 @@ r = _r("Breast + rice + mixed veg")
 r.add(cooked_chicken_breast, 140)
 r.add(cooked_white_rice, 156)
 r.add(mixed_vegetables, 70)
-r.add(fish_oil, 2)
-r.add(eggshell_powder, 2)
 
 # 2) Chicken thigh + rice + green beans
 r = _r("Thigh + rice + green beans")
 r.add(cooked_chicken_thigh, 130)
 r.add(cooked_white_rice, 146)
 r.add(green_beans, 150)
-r.add(fish_oil, 2)
-r.add(eggshell_powder, 2)
 
 # 3) Mixed chicken + rice + carrots
 r = _r("Mixed chicken + rice + carrots")
@@ -142,16 +129,12 @@ r.add(cooked_chicken_breast, 80)
 r.add(cooked_chicken_thigh, 60)
 r.add(cooked_white_rice, 136)
 r.add(cooked_carrots, 200)
-r.add(fish_oil, 2)
-r.add(eggshell_powder, 2)
 
 # 4) Chicken thigh + rice + roasted squash
 r = _r("Thigh + rice + roasted squash")
 r.add(cooked_chicken_thigh, 120)
 r.add(cooked_white_rice, 146)
 r.add(roasted_butternut_squash, 200)
-r.add(fish_oil, 2)
-r.add(eggshell_powder, 2)
 
 RECIPES_BY_NAME: Dict[str, Recipe] = {r.name: r for r in RECIPES}
 
